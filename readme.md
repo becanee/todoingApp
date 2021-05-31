@@ -1,7 +1,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
+  <a href="https://github.com/elcodee/todoingApp">
     <img src="/public/assets/img/todo.png" alt="Logo" width="200" height="200">
   </a>
 
@@ -33,7 +33,7 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][product-screenshot]](https://github.com/elcodee/todoingApp)
 
 This is my project at dumbways.id about express js and integration into the mysql database. With all the knowledge I have and the new knowledge that I got in the dumbways.id class, I implemented it into this project
 
