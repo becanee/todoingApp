@@ -2,15 +2,13 @@
 <br />
 <p align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="/public/assets/img/todo.png" alt="Logo" width="100" height="100">
+    <img src="/public/assets/img/todo.png" alt="Logo" width="200" height="200">
   </a>
 
   <h3 align="center">To-doing App</h3>
 
   <p align="center">
     A Simple Application To Manage Your Tasks
-    <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
   </p>
 </p>
 
