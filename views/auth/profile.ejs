@@ -1,0 +1,68 @@
+<%- include('../components/headComp') %> 
+
+<body class="font-app">
+   <%- include('../components/sidebar') %> 
+      
+   <div id="main">
+      <%- include('../components/navbar') %> 
+
+      <div class="container py-5 mt-4">
+         <div class="row">
+            <div class="col-md-4 mb-4">
+               <div class="animate__animated animate__flipInX">
+                  <div class="card">
+                     <img src="https://i.pinimg.com/736x/89/90/48/899048ab0cc455154006fdb9676964b3.jpg" class="card-img-top" alt="...">
+                     <div class="card-body">
+                       <p class="card-text fs-4"><%= sessionName %></p>
+                       <hr />
+                       <p class="card-text fs-5">My Todo List</p>
+                       <span class="badge bg-dark me-2"><a href="/todo" class="text-decoration-none text-white fs-6">All List<br class="mb-1" /><%= allTodo %></a></span>
+                       <span class="badge bg-success me-2"><a href="/todo/status?stat=done" class="text-decoration-none text-white fs-6">Done<br class="mb-1" /><%= doneTodo %></a></span>
+                       <span class="badge bg-primary me-2"><a href="/todo/status?stat=doing" class="text-decoration-none text-white fs-6">Doing<br class="mb-1" /><%= doingTodo %></a></span>
+                       <span class="badge bg-warning me-2"><a href="/todo/status?stat=pending" class="text-decoration-none text-white fs-6">Pending<br class="mb-1" /><%= pendTodo %></a></span>
+                     </div>
+                   </div>
+               </div>
+            </div>
+            <div class="col-md-8 mb-5">
+               <div class="animate__animated animate__flipInX">
+                  <div class="card">
+                     <h4 class="mx-4 my-3"><u>Change Password</u></h4>
+                     <div class="card-body mx-2">
+                        <% if(messages.fail) { %>
+                           <div class="alert alert-danger alert-dismissible fade show animate__animated animate__flipInX" role="alert">
+                             <strong><i class="fas fa-exclamation-triangle me-2"></i></strong> <%- messages.fail %>
+                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                           </div>
+                        <% } %> 
+                        <form class="form-floating" action="/todo/store" method="post">
+                           <div class="form-floating mb-3">
+                              <input type="text" class="form-control" name="name" value="<%= sessionName %>" id="floatingInput"value="Rama Aditya" placeholder="nama">
+                              <label for="floatingInput">Nama</label>
+                           </div>
+                           <div class="form-floating mb-3">
+                              <input type="text" class="form-control" name="email" id="floatingInput" value="<%= email %>" placeholder="email" readonly>
+                              <label for="floatingInput">Email</label>
+                           </div>
+                           <div class="form-floating mb-3">
+                              <input type="text" class="form-control" name="password" id="floatingInput" placeholder="password">
+                              <label for="floatingInput">Current Password</label>
+                           </div>
+                           <div class="form-floating mb-3">
+                              <input type="text" class="form-control" name="new-password" id="floatingInput" placeholder="new password">
+                              <label for="floatingInput">New Password</label>
+                           </div>
+      
+                           <button type="submit" class="btn btn-primary mt-3"><i class="fas fa-exchange-alt"></i>&nbsp; Change</button>
+                         </form>
+                     </div>
+                   </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <%- include('../components/footer') %> 
+   </div>
+</body>
+</html>

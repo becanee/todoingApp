@@ -1,0 +1,31 @@
+router.post("/login-user", (req, res) => {
+   const { email, password } = req.body;
+   let error = false;
+ 
+   if (!email.length || !password.length) {
+     error = true;
+     req.flash("faildata", "Tolong lengkapi seluruh data");
+     res.render("auth/login", { email });
+   }
+ 
+   connect.query(
+     `SELECT * FROM users WHERE email='${email}'`,
+     (error, data) => {
+       if (error) {
+         req.flash("faildata", "Email atau password anda salah 1" + error);
+         res.render("auth/login", { email });
+       } else {
+         bcrypt.compare(password, data[0].password, function (err, result) {
+           if (err) {
+             req.flash("faildata", "Email atau password anda salah 2" + err);
+             res.render("auth/login", { email });
+           } else {
+             req.session.userId = data[0].id;
+             req.session.userName = data[0].fullName;
+             res.redirect("/todo");
+           }
+         });
+       }
+     }
+   );
+});

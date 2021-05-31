@@ -1,0 +1,207 @@
+<%- include('../components/headComp') %> 
+
+<body class="font-app">
+   <%- include('../components/sidebar') %> 
+      
+   <div id="main">
+      <%- include('../components/navbar') %> 
+
+      <div class="container py-4">
+         <!-- <div class="d-flex justify-content-center animate__animated animate__flipInX">
+            <p class="mx-auto display-3">Forum Page</p>
+         </div> -->
+
+         <div class="card mb-3">
+            <div class="d-flex justify-content-center">
+               <img src="assets/img/forum.png" class="img-fluid d-sm-block d-lg-none" alt="...">
+               <img src="assets/img/forum.png" class="img-fluid d-none d-lg-block" style="width: 50rem; height: 30rem;" alt="...">
+            </div>
+
+            <div class="card-body">
+              <h5 class="card-title fw-bolder fs-2">To-doing Forum's</h5>
+              <p class="card-text">Place To Solve Common Assignment Problems.</p>
+            </div>
+         </div>
+
+         <% if(messages.successComment) { %>
+            <div class="alert alert-success alert-dismissible fade show animate__animated animate__flipInX" role="alert">
+              <strong><i class="fas fa-check-circle me-2"></i></strong> <%- messages.successComment %>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+         <% } %>
+         <div class="d-flex row mt-4 mb-5">
+            <div class="col-md-4">
+               <div class="card">
+                  <div class="card-body">
+                     <div class="d-grid gap-2">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createpost">
+                           <i class="fas fa-plus me-2"></i>Create New Post
+                        </button>
+                        
+                        <!-- Modal -->
+                        <div class="modal fade" id="createpost" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                           <div class="modal-dialog">
+                           <div class="modal-content">
+                              <div class="modal-header">
+                                 <h5 class="modal-title" id="exampleModalLabel">Create New Post</h5>
+                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                 <form class="form-floating" action="/forum/post-user" method="post">
+                                    <div class="form-floating mb-3">
+                                       <input type="text" class="form-control" name="title" id="floatingInput" placeholder="title">
+                                       <label for="floatingInput">Title</label>
+                                     </div>
+                                     <div class="form-floating mb-3">
+                                       <textarea class="form-control" name="content" id="floatingTextarea2" placeholder="description" style="height: 20rem"></textarea>
+                                       <label for="floatingTextarea2">Content</label>
+                                     </div>
+                              </div>
+                              <div class="modal-footer">
+                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Post</button>
+                                 </form>
+                              </div>
+                           </div>
+                           </div>
+                        </div>
+ 
+                        <hr />
+                        <a href="/forum" class="btn btn-light" type="button">All Post</a>
+                        <a href="/forum/status?stat=solved" class="btn btn-light" type="button">Solved</a>
+                      </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-8 mt-3">
+               <h2>Recent Posts</h2>
+               <hr />
+               <% if(messages.noMatch) { %>
+                  <div class="alert alert-warning alert-dismissible fade show animate__animated animate__flipInX" role="alert">
+                    <strong><i class="fas fa-exclamation-triangle me-2"></i></strong> <%- messages.noMatch %>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+               <% } %>
+               <div class="accordion accordion-flush" id="accordionFlushExample">
+                  
+               <% posts.forEach(post => { %>
+                  <div class="accordion-item">
+                     <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button collapsed mx-auto" type="button" data-bs-toggle="collapse" data-bs-target="#post<%= post.id %>" aria-expanded="false" aria-controls="flush-collapseOne">
+                           <img src="/assets/img/user.png" class="rounded float-start" style="width: 3rem;" alt="...">
+                           <div class="d-block">
+                              <h5 class="ms-3 mt-2"><%= post.title %></h5>
+                              <h6 class="ms-3 fw-bolder"><%= post.author %> | <span class="text-muted"><%= created_at_post %> </span> |<% if(post.status == 'solved') { %> <span class="badge bg-success">Solved</span> <% } else { %> <span class="badge bg-warning text-dark">Unsolved</span> <% } %> </h6>
+                           </div>
+                        </button>
+                     </h2>
+                     <div id="post<%= post.id %>" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                           <p>
+                              <%= post.content %>
+                           </p>
+                           <% if(post.user_id == sessionID) { %>
+                              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editpost">
+                                 <i class="fas fa-edit me-2"></i>Edit Post
+                              </button>
+                              
+                              <!-- Modal -->
+                              <div class="modal fade" id="editpost" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                 <div class="modal-dialog">
+                                 <div class="modal-content">
+                                    <div class="modal-header">
+                                       <h5 class="modal-title" id="exampleModalLabel">Edit Post <b><%= post.title %> </b></h5>
+                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                       <form class="form-floating" action="/forum/post-update" method="post">
+                                          <div class="form-floating mb-3">
+                                             <input type="hidden" class="form-control" name="postID" value="<%= post.id %>">
+                                          </div>
+                                          <div class="form-floating mb-3">
+                                             <input type="text" class="form-control" name="created" value="<%= post.createdAt %>">
+                                          </div>
+                                          <div class="form-floating mb-3">
+                                             <input type="text" class="form-control" name="title" id="floatingInput" value="<%= post.title %>">
+                                             <label for="floatingInput">Title</label>
+                                           </div>
+                                           <div class="form-floating mb-3">
+                                             <textarea class="form-control" name="content" id="floatingTextarea2" placeholder="description" style="height: 20rem"><%= post.content %></textarea>
+                                             <label for="floatingTextarea2">Content</label>
+                                           </div>
+                                           <div class="form-floating">
+                                             <select class="form-select" name="status" id="floatingSelect">
+                                               <option selected readonly><%= post.status %></option>
+                                               <option value="solved">Solved</option>
+                                               <option value="unsolved">Unsolved</option>
+                                             </select>
+                                             <label for="floatingSelect">Status</label>
+                                           </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                          <button type="submit" class="btn btn-primary">Update</button>
+                                       </form>
+                                    </div>
+                                 </div>
+                                 </div>
+                              </div>
+                           <% } %> 
+                           
+                           <hr class="mt-4 mb-4" />
+
+                           <form action="/forum/coment-user" method="post">
+                              <div class="form-floating mb-3">
+                                 <input type="hidden" class="form-control" name="post_id" value="<%= post.id %>">
+                              </div>
+                              <div class="form-floating">
+                                 <textarea class="form-control" name="comments" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                                 <label for="floatingTextarea2">Leave Comments / Answer</label>
+                              </div>
+                              <button type="submit" class="btn btn-outline-info mt-2"><i class="fas fa-paper-plane me-2"></i>Submit</button>
+                           </form>
+
+                           <hr class="mt-4 mb-4" />
+   
+                           <div class="container">
+                              <div class="row">
+                                 <% comments.forEach(coment => { %>
+                                    <% if(coment.post_id == post.id) { %>
+                                       <div class="col-md-12 mb-3">
+                                          <img src="/assets/img/user.png" class="rounded float-start" style="width: 3rem;" alt="...">
+                                          <div class="d-block">
+                                             <h6 class="fw-bolder pt-2">&nbsp; &nbsp; <%= coment.user %>  | <span class="text-muted"><%= created_at_coment %> </span></h6>
+                                             <p class="mt-2">&nbsp; &nbsp; <%= coment.comment %>  </p>
+                                          </div>
+                                       </div>
+                                    <% } %> 
+                                <% }) %> 
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <hr class="mt-4 mb-4 py-1" />
+               <% }) %>
+
+
+                </div>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+            </div>
+         </div>
+      </div>
+
+      <%- include('../components/footer') %> 
+   </div>
+</body>
+</html>

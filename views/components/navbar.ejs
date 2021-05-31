@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-primary animate__animated animate__bounceInDown">
+   <div class="container-fluid">
+     <button class="navbar-toggler bg-blue-400" type="button" onclick="openSide()">
+       <span class="navbar-toggler-icon"></span>
+     </button>
+     <div class="collapse navbar-collapse">
+       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+         <li class="nav-item px-2 py-2">
+            <button type="button" class="btn btn-outline-primary text-light" onclick="openSide()"><i class="fas fa-bars"></i>&nbsp; Menu</button>
+         </li>
+      </ul>
+      <span class="navbar-text">
+         <% if(!sessionID){ %>
+            <a href="/login" class="btn btn-outline-info text-white">Login</a>
+            <a href="/register" class="btn btn-outline-primary text-white">Register</a>
+         <% } else { %>
+            <div class="nav-item dropdown px-5">
+               <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <%= sessionName %> 
+               </a>
+               <ul class="dropdown-menu animate__animated animate__flipInY" aria-labelledby="navbarDropdownMenuLink">
+                  <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                  <li><a class="dropdown-item" href="/logout">Logout</a></li>
+               </ul>
+            </div>
+         <% } %> 
+      </span>
+     </div>
+   </div>
+ </nav>

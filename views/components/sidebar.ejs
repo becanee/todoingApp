@@ -1,0 +1,20 @@
+
+<div id="mySidebar" class="left-menu">
+   <a href="javascript:void(0)" class="close-btn" onclick="closeSide()">×</a>
+   <a href="/"><i class="fas fa-home mx-2"></i>Home</a>
+   <% if(!sessionID){ %>
+      <!-- Desktop d-lg-none -->
+      <a href="/login" class="d-none d-sm-block d-lg-none"><i class="fas fa-sign-in-alt me-2"></i>Login</a>
+      <a href="/register" class="d-none d-sm-block d-lg-none"><i class="fas fa-user-plus me-2"></i>Register</a>
+      <!-- Mobile -->
+      <a href="/login" class="d-md-block d-xl-none"><i class="fas fa-sign-in-alt me-2"></i>Login</a>
+      <a href="/register" class="d-md-block d-xl-none"><i class="fas fa-user-plus me-2"></i>Register</a>
+   <% } else { %>
+      <a href="/todo"><i class="fas fa-clipboard-list mx-2"></i>My Todo</a>
+      <a href="/forum"><i class="fas fa-users mx-2"></i>Forum</a>
+      <a href="/profile" class="d-md-block d-xl-none"><i class="fas fa-user me-2"></i>Profile</a>
+      <a href="/logout" class="d-md-block d-xl-none"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+   <% } %> 
+
+
+ </div>

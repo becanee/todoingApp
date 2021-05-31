@@ -1,0 +1,58 @@
+@import url(//fonts.googleapis.com/css?family=Comfortaa);
+
+.font-app {
+   font-family: Comfortaa;
+}
+ 
+.left-menu {
+height: 100%;
+width: 0;
+position: fixed;
+z-index: 1;
+top: 0;
+left: 0;
+background-color: rgb(55, 100, 250);
+overflow-x: hidden;
+transition: 0.5s;
+padding-top: 60px;
+}
+
+.left-menu a {
+padding: 8px 8px 8px 32px;
+text-decoration: none;
+font-size: 25px;
+color: #fdfdfd;
+display: block;
+transition: 0.3s;
+}
+
+.left-menu a:hover {
+color: #f1f1f1;
+}
+
+.left-menu .close-btn {
+position: absolute;
+top: 0;
+right: 25px;
+font-size: 36px;
+margin-left: 50px;
+}
+
+#main {
+transition: margin-left .5s;
+}
+
+.login-bg{
+   background-image: url(../img/login-bg.png);
+   background-size: cover;
+   background-repeat: no-repeat;
+   background-position: center;
+   background-attachment: fixed;
+   height: 100%;
+}
+ 
+ /* Layar lebih kecil dari 450px, ubah style */
+ @media screen and (max-height: 450px) {
+   .left-menu {padding-top: 15px;}
+   .left-menu a {font-size: 18px;}
+ }

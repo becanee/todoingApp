@@ -1,0 +1,28 @@
+<%- include('../components/headComp') %> 
+
+<body class="font-app">
+   <%- include('../components/sidebar') %> 
+      
+   <div id="main">
+      <%- include('../components/navbar') %> 
+
+      <div class="container py-4">
+         <div class="d-flex justify-content-center animate__animated animate__flipInX">
+            <p class="mx-auto display-3">To-doing</p>
+         </div>
+         <div class="d-flex justify-content-center animate__animated animate__jackInTheBox">
+            <img src="assets/img/todo.png" class="img-fluid d-sm-block d-lg-none" alt="...">
+            <img src="assets/img/todo-pc.png" class="img-fluid d-none d-lg-block" alt="...">
+         </div>
+         <p class="text-center fs-4 animate__animated animate__slideInRight">
+            Sebuah Website Untuk Mempermudah Mengelola Tugas Anda Agar Lebih Terstruktur Dan Rapi
+         </p>
+         <div class="d-flex justify-content-center animate__animated animate__rubberBand">
+            <a href="/todo/create" class="btn btn-outline-primary btn-lg"><i class="fas fa-plus mx-2"></i>Create List</a>
+         </div>
+      </div>
+
+      <%- include('../components/footer') %> 
+   </div>
+</body>
+</html>

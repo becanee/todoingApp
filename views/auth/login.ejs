@@ -1,0 +1,46 @@
+<%- include('../components/headComp') %>
+
+<body class="font-app login-bg">
+
+   <div class="d-flex justify-content-center animate__animated animate__zoomIn">
+      <div class="card" style="width: 30rem; margin: 10rem 10px;">
+         <div class="card-body">
+           <h1 class="card-title text-center">Login</h1>
+            <% if(messages.authreq) { %>
+               <div class="alert alert-danger alert-dismissible fade show animate__animated animate__flipInX" role="alert">
+                  <strong><i class="fas fa-exclamation-triangle me-2"></i></strong> <%- messages.authreq %>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+               </div>
+            <% } %>
+            <% if(messages.faildata) { %>
+               <div class="alert alert-danger alert-dismissible fade show animate__animated animate__flipInX" role="alert">
+                  <strong><i class="fas fa-exclamation-triangle me-2"></i></strong> <%- messages.faildata %>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+               </div>
+            <% } %>
+            <form class="mt-4 mx-3" action="/login-user" method="post">
+               <div class="mb-3">
+                  <label class="form-label">Email</label>
+                  <input type="email" class="form-control" name="email" value="<%= email %>" placeholder="yourmail@example.com" autocomplete="off">
+                  <% if(messages.failemail) { %>
+                     <div class="form-text text-danger"><%- messages.failemail %></div>
+                  <% } %>
+               </div>
+               <div class="mb-3">
+                  <label class="form-label">Password</label>
+                  <input type="password" class="form-control" name="password" placeholder="Password" autocomplete="off">
+                  <% if(messages.failpass) { %>
+                     <div class="form-text text-danger"><%- messages.failpass %></div>
+                  <% } %>
+               </div>
+               <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>&nbsp; Login</button>
+            </form>
+
+            <h6 class="mt-5 text-center">Dont Have Account ? <a href="/register">Register</a></h6>
+            <h6 class="text-center"><a href="/">Home</a></h6>
+         </div>
+       </div>
+   </div>
+
+</body>
+</html>

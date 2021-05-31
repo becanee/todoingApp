@@ -1,0 +1,65 @@
+<%- include('../components/headComp') %> 
+
+<body class="font-app">
+   <%- include('../components/sidebar') %> 
+      
+   <div id="main">
+      <%- include('../components/navbar') %> 
+
+      <div class="container py-4">
+         <div class="d-flex justify-content-center animate__animated animate__flipInX">
+            <p class="text-center mx-auto fs-3">Update List <b class="text-primary"><%= title %></b></p>
+         </div>
+
+         <div class="d-flex justify-content-center animate__animated animate__flipInX">
+            <div class="card" style="width: 30rem; height: 28,5rem; margin: 1rem 10px;">
+               <h4 class="mx-4 my-3"><u>Update Todo List</u></h4>
+               <div. class="card-body mx-2">
+                  <% if(messages.fail) { %>
+                     <div class="alert alert-danger alert-dismissible fade show animate__animated animate__flipInX" role="alert">
+                       <strong><i class="fas fa-exclamation-triangle me-2"></i></strong> <%- messages.fail %>
+                       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                     </div>
+                  <% } %>
+                  <form class="form-floating" action="/todo/update" method="post">
+                     <div class="form-floating mb-3">
+                        <input type="hidden" class="form-control" name="id" value="<%= id %>">
+                     </div>
+                     <div class="form-floating mb-3">
+                        <input type="hidden" class="form-control" name="user_id" value="<%= user_id %>">
+                     </div>
+                     <div class="form-floating mb-3">
+                        <input type="hidden" class="form-control" name="created" value="<%= created_at %>">
+                     </div>
+                     <div class="form-floating mb-3">
+                        <input type="hidden" class="form-control" name="updated" value="<%= updated_at %>">
+                     </div>
+                     <div class="form-floating mb-3">
+                        <input type="text" class="form-control" name="title" id="floatingInput" value="<%= title %>">
+                        <label for="floatingInput">Title</label>
+                      </div>
+                      <div class="form-floating mb-3">
+                        <textarea class="form-control" name="desc" id="floatingTextarea2" style="height: 10rem"><%= desc %></textarea>
+                        <label for="floatingTextarea2">Description</label>
+                      </div>
+                      <div class="form-floating">
+                        <select class="form-select" name="status" id="floatingSelect" aria-label="Floating label select example">
+                          <option selected value="<%= status %>"><%= status %></option>
+                          <option value="pending">Pending</option>
+                          <option value="doing">Doing</option>
+                          <option value="done">Done</option>
+                        </select>
+                        <label for="floatingSelect">Status</label>
+                      </div>
+
+                      <a href="/todo" class="btn btn-info float-start text-white mt-3"><i class="fas fa-arrow-left"></i>&nbsp; Back</a>
+                      <button type="submit" class="btn btn-primary float-end mt-3"><i class="fas fa-edit"></i>&nbsp; Update</button>
+                   </form>
+               </div.card-header>
+             </div>
+         </div>
+
+      <%- include('../components/footer') %> 
+   </div>
+</body>
+</html>
