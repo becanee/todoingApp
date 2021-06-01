@@ -20,7 +20,6 @@ router.get('/login', (req, res) => {
 /* POST login process */
 router.post('/login-user', (req, res) => {
    let { email, password } = req.body;
-   console.log(req.body);
 
    if (!email.length || !password.length) {
       req.flash('faildata', `Email & Password Field Cannot Be Empty`) 
@@ -28,11 +27,15 @@ router.post('/login-user', (req, res) => {
    }
 
    connect.query(`SELECT * FROM users WHERE email = ?`, email, (error, data) => {
-      if (error) {
-         req.flash('faildata', `Incorrect Email Or Password |  ${error}`)
+      if (error) throw error;
+
+      if (!data.length) {
+         req.flash('faildata', `Incorrect Email`)
          res.render('auth/login', { app: 'Login', email }) 
       } else {  
-         bcrypt.compare(password, data[0].password, function (err, result) {
+         bcrypt.compare(password, data[0].password, (err, result) => {
+            if (err) throw err;
+            
             if (!result) {
                req.flash('faildata', `Incorrect Password`) 
                res.render('auth/login', { app: 'Login', email })
